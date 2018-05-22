@@ -1,8 +1,6 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include "comment.h"
-
 #include <QVector>
 
 class Product
@@ -13,7 +11,6 @@ private:
     QString name;
     QString brand;
     int price;
-    QVector<Comment> comment;
     QString imagePath;
     int popular;
 public:
@@ -37,8 +34,6 @@ public:
     int getPopular() const;
     void setPopular(int value);
 
-    QVector<Comment> getComment() const;
-    void setComment(const QVector<Comment> &value);
 };
 
 #endif // PRODUCT_H

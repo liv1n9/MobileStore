@@ -39,16 +39,6 @@ void Product::setPrice(int value)
     price = value;
 }
 
-QVector<Comment> Product::getComment() const
-{
-    return comment;
-}
-
-void Product::setComment(const QVector<Comment> &value)
-{
-    comment = value;
-}
-
 QString Product::getImagePath() const
 {
     return imagePath;

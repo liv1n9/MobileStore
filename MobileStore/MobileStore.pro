@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     accountsdataset.cpp \
     administrator.cpp \
-    comment.cpp \
-    commentsdataset.cpp \
     fileutils.cpp \
     main.cpp \
     mainwindowcontroller.cpp \
@@ -41,14 +39,12 @@ SOURCES += \
     compareutils.cpp \
     algoutils.cpp \
     productstable.cpp \
-    productstablesize.cpp
+    productstablesize.cpp \
+    productbuydialog.cpp
 
 HEADERS += \
     accountsdataset.h \
     administrator.h \
-    comment.h \
-    commentsdataset.h \
-    dataset.h \
     fileutils.h \
     mainwindowcontroller.h \
     numberutils.h \
@@ -61,11 +57,13 @@ HEADERS += \
     compareutils.h \
     algoutils.h \
     productstable.h \
-    productstablesize.h
+    productstablesize.h \
+    productbuydialog.h
 
 FORMS += \
     mainwindowcontroller.ui \
-    productwidget.ui
+    productwidget.ui \
+    productbuydialog.ui
 
 SUBDIRS += \
     MobileStore.pro

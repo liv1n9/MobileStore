@@ -19,6 +19,8 @@ public:
 
     QTabWidget *getProductsTab() const;
     int getProductsDataSize();
+    void setIsUser(bool value);
+    void setIsGuess(bool value);
 
 private:
     QTabWidget *productsTab = new QTabWidget();

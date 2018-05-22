@@ -10,8 +10,8 @@ public:
     Administrator();
     ~Administrator();
 private:
-    const QString ACCOUNTS_DATA_PATH = "\\accounts.txt";
-    const QString PRODUCTS_DATA_PATH = "\\products.txt";
+    const QString ACCOUNTS_DATA_PATH = "\\data\\accounts.txt";
+    const QString PRODUCTS_DATA_PATH = "\\data\\products.txt";
     QList<Person> accountsData;
     QList<Product> productsData;
 };

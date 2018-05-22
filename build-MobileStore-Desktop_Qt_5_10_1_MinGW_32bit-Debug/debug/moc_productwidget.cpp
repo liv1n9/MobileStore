@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ProductWidget_t {
-    QByteArrayData data[6];
-    char stringdata0[51];
+    QByteArrayData data[8];
+    char stringdata0[80];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,14 @@ QT_MOC_LITERAL(1, 14, 10), // "enterEvent"
 QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 7), // "QEvent*"
 QT_MOC_LITERAL(4, 34, 5), // "event"
-QT_MOC_LITERAL(5, 40, 10) // "leaveEvent"
+QT_MOC_LITERAL(5, 40, 10), // "leaveEvent"
+QT_MOC_LITERAL(6, 51, 15), // "mousePressEvent"
+QT_MOC_LITERAL(7, 67, 12) // "QMouseEvent*"
 
     },
     "ProductWidget\0enterEvent\0\0QEvent*\0"
-    "event\0leaveEvent"
+    "event\0leaveEvent\0mousePressEvent\0"
+    "QMouseEvent*"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,7 +53,7 @@ static const uint qt_meta_data_ProductWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,12 +61,14 @@ static const uint qt_meta_data_ProductWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x08 /* Private */,
-       5,    1,   27,    2, 0x08 /* Private */,
+       1,    1,   29,    2, 0x08 /* Private */,
+       5,    1,   32,    2, 0x08 /* Private */,
+       6,    1,   35,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 7,    4,
 
        0        // eod
 };
@@ -76,6 +81,7 @@ void ProductWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->enterEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 1: _t->leaveEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 2: _t->mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -106,13 +112,13 @@ int ProductWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

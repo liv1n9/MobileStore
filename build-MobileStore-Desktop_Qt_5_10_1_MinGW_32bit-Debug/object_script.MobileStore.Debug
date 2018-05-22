@@ -1,8 +1,6 @@
 INPUT(
 ./debug\accountsdataset.o
 ./debug\administrator.o
-./debug\comment.o
-./debug\commentsdataset.o
 ./debug\fileutils.o
 ./debug\main.o
 ./debug\mainwindowcontroller.o
@@ -17,6 +15,7 @@ INPUT(
 ./debug\algoutils.o
 ./debug\productstable.o
 ./debug\productstablesize.o
+./debug\productbuydialog.o
 ./debug\moc_mainwindowcontroller.o
 ./debug\moc_productwidget.o
 );

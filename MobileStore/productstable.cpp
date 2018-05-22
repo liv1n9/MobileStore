@@ -30,6 +30,20 @@ void ProductsTable::appendWidgetList(int row, int column, const Product &product
     productsTable->setCellWidget(row, column, productWidget);
 }
 
+void ProductsTable::setIsUser(bool value)
+{
+    for (int i = 0; i < productsWidgetList.size(); i++) {
+        productsWidgetList.at(i)->setIsUser(value);
+    }
+}
+
+void ProductsTable::setIsGuess(bool value)
+{
+    for (int i = 0; i < productsWidgetList.size(); i++) {
+        productsWidgetList.at(i)->setIsGuess(value);
+    }
+}
+
 void ProductsTable::setProducesTable()
 {
     productsTable = new QTableWidget();

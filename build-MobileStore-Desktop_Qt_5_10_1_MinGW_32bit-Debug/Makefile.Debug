@@ -47,8 +47,6 @@ OBJECTS_DIR   = debug
 
 SOURCES       = ..\MobileStore\accountsdataset.cpp \
 		..\MobileStore\administrator.cpp \
-		..\MobileStore\comment.cpp \
-		..\MobileStore\commentsdataset.cpp \
 		..\MobileStore\fileutils.cpp \
 		..\MobileStore\main.cpp \
 		..\MobileStore\mainwindowcontroller.cpp \
@@ -62,12 +60,11 @@ SOURCES       = ..\MobileStore\accountsdataset.cpp \
 		..\MobileStore\compareutils.cpp \
 		..\MobileStore\algoutils.cpp \
 		..\MobileStore\productstable.cpp \
-		..\MobileStore\productstablesize.cpp debug\moc_mainwindowcontroller.cpp \
+		..\MobileStore\productstablesize.cpp \
+		..\MobileStore\productbuydialog.cpp debug\moc_mainwindowcontroller.cpp \
 		debug\moc_productwidget.cpp
 OBJECTS       = debug/accountsdataset.o \
 		debug/administrator.o \
-		debug/comment.o \
-		debug/commentsdataset.o \
 		debug/fileutils.o \
 		debug/main.o \
 		debug/mainwindowcontroller.o \
@@ -82,14 +79,12 @@ OBJECTS       = debug/accountsdataset.o \
 		debug/algoutils.o \
 		debug/productstable.o \
 		debug/productstablesize.o \
+		debug/productbuydialog.o \
 		debug/moc_mainwindowcontroller.o \
 		debug/moc_productwidget.o
 
 DIST          = MobileStore.pro.user ..\MobileStore\accountsdataset.h \
 		..\MobileStore\administrator.h \
-		..\MobileStore\comment.h \
-		..\MobileStore\commentsdataset.h \
-		..\MobileStore\dataset.h \
 		..\MobileStore\fileutils.h \
 		..\MobileStore\mainwindowcontroller.h \
 		..\MobileStore\numberutils.h \
@@ -102,10 +97,9 @@ DIST          = MobileStore.pro.user ..\MobileStore\accountsdataset.h \
 		..\MobileStore\compareutils.h \
 		..\MobileStore\algoutils.h \
 		..\MobileStore\productstable.h \
-		..\MobileStore\productstablesize.h ..\MobileStore\accountsdataset.cpp \
+		..\MobileStore\productstablesize.h \
+		..\MobileStore\productbuydialog.h ..\MobileStore\accountsdataset.cpp \
 		..\MobileStore\administrator.cpp \
-		..\MobileStore\comment.cpp \
-		..\MobileStore\commentsdataset.cpp \
 		..\MobileStore\fileutils.cpp \
 		..\MobileStore\main.cpp \
 		..\MobileStore\mainwindowcontroller.cpp \
@@ -119,7 +113,8 @@ DIST          = MobileStore.pro.user ..\MobileStore\accountsdataset.h \
 		..\MobileStore\compareutils.cpp \
 		..\MobileStore\algoutils.cpp \
 		..\MobileStore\productstable.cpp \
-		..\MobileStore\productstablesize.cpp
+		..\MobileStore\productstablesize.cpp \
+		..\MobileStore\productbuydialog.cpp
 QMAKE_TARGET  = MobileStore
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = MobileStore.exe
@@ -130,7 +125,7 @@ DESTDIR_TARGET = debug\MobileStore.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindowcontroller.h ui_productwidget.h $(OBJECTS) 
+$(DESTDIR_TARGET): ui_mainwindowcontroller.h ui_productwidget.h ui_productbuydialog.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.MobileStore.Debug  $(LIBS)
 
 qmake: FORCE
@@ -139,10 +134,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) MobileStore.zip $(SOURCES) $(DIST) ..\MobileStore\MobileStore.pro C:\Qt\5.10.1\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.10.1\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\windows-vulkan.conf C:\Qt\5.10.1\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.10.1\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\default_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qml_debug.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\lex.prf ..\MobileStore\MobileStore.pro C:\Qt\5.10.1\mingw53_32\lib\qtmaind.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Cored.prl    C:\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp ..\MobileStore\accountsdataset.h ..\MobileStore\administrator.h ..\MobileStore\comment.h ..\MobileStore\commentsdataset.h ..\MobileStore\dataset.h ..\MobileStore\fileutils.h ..\MobileStore\mainwindowcontroller.h ..\MobileStore\numberutils.h ..\MobileStore\person.h ..\MobileStore\product.h ..\MobileStore\productsdataset.h ..\MobileStore\productwidget.h ..\MobileStore\user.h ..\MobileStore\productstab.h ..\MobileStore\compareutils.h ..\MobileStore\algoutils.h ..\MobileStore\productstable.h ..\MobileStore\productstablesize.h  ..\MobileStore\accountsdataset.cpp ..\MobileStore\administrator.cpp ..\MobileStore\comment.cpp ..\MobileStore\commentsdataset.cpp ..\MobileStore\fileutils.cpp ..\MobileStore\main.cpp ..\MobileStore\mainwindowcontroller.cpp ..\MobileStore\numberutils.cpp ..\MobileStore\person.cpp ..\MobileStore\product.cpp ..\MobileStore\productsdataset.cpp ..\MobileStore\productwidget.cpp ..\MobileStore\user.cpp ..\MobileStore\productstab.cpp ..\MobileStore\compareutils.cpp ..\MobileStore\algoutils.cpp ..\MobileStore\productstable.cpp ..\MobileStore\productstablesize.cpp ..\MobileStore\mainwindowcontroller.ui ..\MobileStore\productwidget.ui    
+	$(ZIP) MobileStore.zip $(SOURCES) $(DIST) ..\MobileStore\MobileStore.pro C:\Qt\5.10.1\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.10.1\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.10.1\mingw53_32\mkspecs\common\windows-vulkan.conf C:\Qt\5.10.1\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.10.1\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\default_pre.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qml_debug.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.10.1\mingw53_32\mkspecs\features\lex.prf ..\MobileStore\MobileStore.pro C:\Qt\5.10.1\mingw53_32\lib\qtmaind.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.10.1\mingw53_32\lib\Qt5Cored.prl    C:\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp ..\MobileStore\accountsdataset.h ..\MobileStore\administrator.h ..\MobileStore\fileutils.h ..\MobileStore\mainwindowcontroller.h ..\MobileStore\numberutils.h ..\MobileStore\person.h ..\MobileStore\product.h ..\MobileStore\productsdataset.h ..\MobileStore\productwidget.h ..\MobileStore\user.h ..\MobileStore\productstab.h ..\MobileStore\compareutils.h ..\MobileStore\algoutils.h ..\MobileStore\productstable.h ..\MobileStore\productstablesize.h ..\MobileStore\productbuydialog.h  ..\MobileStore\accountsdataset.cpp ..\MobileStore\administrator.cpp ..\MobileStore\fileutils.cpp ..\MobileStore\main.cpp ..\MobileStore\mainwindowcontroller.cpp ..\MobileStore\numberutils.cpp ..\MobileStore\person.cpp ..\MobileStore\product.cpp ..\MobileStore\productsdataset.cpp ..\MobileStore\productwidget.cpp ..\MobileStore\user.cpp ..\MobileStore\productstab.cpp ..\MobileStore\compareutils.cpp ..\MobileStore\algoutils.cpp ..\MobileStore\productstable.cpp ..\MobileStore\productstablesize.cpp ..\MobileStore\productbuydialog.cpp ..\MobileStore\mainwindowcontroller.ui ..\MobileStore\productwidget.ui ..\MobileStore\productbuydialog.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\accountsdataset.o debug\administrator.o debug\comment.o debug\commentsdataset.o debug\fileutils.o debug\main.o debug\mainwindowcontroller.o debug\numberutils.o debug\person.o debug\product.o debug\productsdataset.o debug\productwidget.o debug\user.o debug\productstab.o debug\compareutils.o debug\algoutils.o debug\productstable.o debug\productstablesize.o debug\moc_mainwindowcontroller.o debug\moc_productwidget.o
+	-$(DEL_FILE) debug\accountsdataset.o debug\administrator.o debug\fileutils.o debug\main.o debug\mainwindowcontroller.o debug\numberutils.o debug\person.o debug\product.o debug\productsdataset.o debug\productwidget.o debug\user.o debug\productstab.o debug\compareutils.o debug\algoutils.o debug\productstable.o debug\productstablesize.o debug\productbuydialog.o debug\moc_mainwindowcontroller.o debug\moc_productwidget.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -256,7 +251,6 @@ debug/moc_mainwindowcontroller.cpp: ../MobileStore/accountsdataset.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
 		../MobileStore/administrator.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		../MobileStore/productsdataset.h \
 		../MobileStore/productstab.h \
@@ -264,32 +258,35 @@ debug/moc_mainwindowcontroller.cpp: ../MobileStore/accountsdataset.h \
 		../MobileStore/productstable.h \
 		../MobileStore/productstablesize.h \
 		../MobileStore/productwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -317,13 +314,12 @@ debug/moc_mainwindowcontroller.cpp: ../MobileStore/accountsdataset.h \
 		../MobileStore/mainwindowcontroller.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
-	C:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/MobileStore/MobileStore -IC:/Qt/5.10.1/mingw53_32/include -IC:/Qt/5.10.1/mingw53_32/include/QtWidgets -IC:/Qt/5.10.1/mingw53_32/include/QtGui -IC:/Qt/5.10.1/mingw53_32/include/QtANGLE -IC:/Qt/5.10.1/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MobileStore\mainwindowcontroller.h -o debug\moc_mainwindowcontroller.cpp
+	C:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/Github/MobileStore/MobileStore -IC:/Qt/5.10.1/mingw53_32/include -IC:/Qt/5.10.1/mingw53_32/include/QtWidgets -IC:/Qt/5.10.1/mingw53_32/include/QtGui -IC:/Qt/5.10.1/mingw53_32/include/QtANGLE -IC:/Qt/5.10.1/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MobileStore\mainwindowcontroller.h -o debug\moc_mainwindowcontroller.cpp
 
 debug/moc_productwidget.cpp: ../MobileStore/product.h \
-		../MobileStore/comment.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
@@ -345,60 +341,62 @@ debug/moc_productwidget.cpp: ../MobileStore/product.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregexp.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
@@ -406,10 +404,6 @@ debug/moc_productwidget.cpp: ../MobileStore/product.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
@@ -429,18 +423,22 @@ debug/moc_productwidget.cpp: ../MobileStore/product.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		../MobileStore/productwidget.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.10.1/mingw53_32/bin/moc.exe
-	C:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/MobileStore/MobileStore -IC:/Qt/5.10.1/mingw53_32/include -IC:/Qt/5.10.1/mingw53_32/include/QtWidgets -IC:/Qt/5.10.1/mingw53_32/include/QtGui -IC:/Qt/5.10.1/mingw53_32/include/QtANGLE -IC:/Qt/5.10.1/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MobileStore\productwidget.h -o debug\moc_productwidget.cpp
+	C:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/Github/MobileStore/MobileStore -IC:/Qt/5.10.1/mingw53_32/include -IC:/Qt/5.10.1/mingw53_32/include/QtWidgets -IC:/Qt/5.10.1/mingw53_32/include/QtGui -IC:/Qt/5.10.1/mingw53_32/include/QtANGLE -IC:/Qt/5.10.1/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MobileStore\productwidget.h -o debug\moc_productwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindowcontroller.h ui_productwidget.h
+compiler_uic_make_all: ui_mainwindowcontroller.h ui_productwidget.h ui_productbuydialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindowcontroller.h ui_productwidget.h
+	-$(DEL_FILE) ui_mainwindowcontroller.h ui_productwidget.h ui_productbuydialog.h
 ui_mainwindowcontroller.h: ../MobileStore/mainwindowcontroller.ui \
 		C:/Qt/5.10.1/mingw53_32/bin/uic.exe
 	C:\Qt\5.10.1\mingw53_32\bin\uic.exe ..\MobileStore\mainwindowcontroller.ui -o ui_mainwindowcontroller.h
@@ -448,6 +446,10 @@ ui_mainwindowcontroller.h: ../MobileStore/mainwindowcontroller.ui \
 ui_productwidget.h: ../MobileStore/productwidget.ui \
 		C:/Qt/5.10.1/mingw53_32/bin/uic.exe
 	C:\Qt\5.10.1\mingw53_32\bin\uic.exe ..\MobileStore\productwidget.ui -o ui_productwidget.h
+
+ui_productbuydialog.h: ../MobileStore/productbuydialog.ui \
+		C:/Qt/5.10.1/mingw53_32/bin/uic.exe
+	C:\Qt\5.10.1\mingw53_32\bin\uic.exe ..\MobileStore\productbuydialog.ui -o ui_productbuydialog.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -587,7 +589,6 @@ debug/administrator.o: ../MobileStore/administrator.cpp ../MobileStore/administr
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
@@ -601,44 +602,6 @@ debug/administrator.o: ../MobileStore/administrator.cpp ../MobileStore/administr
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\administrator.o ..\MobileStore\administrator.cpp
-
-debug/comment.o: ../MobileStore/comment.cpp ../MobileStore/comment.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtcore-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsystemdetection.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qprocessordetection.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcompilerdetection.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtypeinfo.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsysinfo.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlogging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qflags.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbasicatomic.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_bootstrap.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qgenericatomic.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_cxx11.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_msvc.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobalstatic.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\comment.o ..\MobileStore\comment.cpp
-
-debug/commentsdataset.o: ../MobileStore/commentsdataset.cpp ../MobileStore/commentsdataset.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\commentsdataset.o ..\MobileStore\commentsdataset.cpp
 
 debug/fileutils.o: ../MobileStore/fileutils.cpp ../MobileStore/fileutils.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
@@ -788,7 +751,6 @@ debug/main.o: ../MobileStore/main.cpp ../MobileStore/mainwindowcontroller.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
 		../MobileStore/administrator.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		../MobileStore/productsdataset.h \
 		../MobileStore/productstab.h \
@@ -796,32 +758,35 @@ debug/main.o: ../MobileStore/main.cpp ../MobileStore/mainwindowcontroller.h \
 		../MobileStore/productstable.h \
 		../MobileStore/productstablesize.h \
 		../MobileStore/productwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -890,7 +855,6 @@ debug/mainwindowcontroller.o: ../MobileStore/mainwindowcontroller.cpp ../MobileS
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
 		../MobileStore/compareutils.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
@@ -952,32 +916,35 @@ debug/mainwindowcontroller.o: ../MobileStore/mainwindowcontroller.cpp ../MobileS
 		../MobileStore/productstable.h \
 		../MobileStore/productstablesize.h \
 		../MobileStore/productwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -1044,8 +1011,7 @@ debug/mainwindowcontroller.o: ../MobileStore/mainwindowcontroller.cpp ../MobileS
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDesktopWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qmessagebox.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindowcontroller.o ..\MobileStore\mainwindowcontroller.cpp
 
 debug/numberutils.o: ../MobileStore/numberutils.cpp ../MobileStore/numberutils.h \
@@ -1119,10 +1085,9 @@ debug/person.o: ../MobileStore/person.cpp ../MobileStore/person.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\person.o ..\MobileStore\person.cpp
 
 debug/product.o: ../MobileStore/product.cpp ../MobileStore/product.h \
-		../MobileStore/comment.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
@@ -1144,20 +1109,19 @@ debug/product.o: ../MobileStore/product.cpp ../MobileStore/product.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
@@ -1201,7 +1165,6 @@ debug/productsdataset.o: ../MobileStore/productsdataset.cpp ../MobileStore/fileu
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
 		../MobileStore/productsdataset.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
@@ -1259,10 +1222,9 @@ debug/productsdataset.o: ../MobileStore/productsdataset.cpp ../MobileStore/fileu
 
 debug/productwidget.o: ../MobileStore/productwidget.cpp ../MobileStore/productwidget.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
@@ -1284,60 +1246,62 @@ debug/productwidget.o: ../MobileStore/productwidget.cpp ../MobileStore/productwi
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregexp.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
@@ -1345,10 +1309,6 @@ debug/productwidget.o: ../MobileStore/productwidget.cpp ../MobileStore/productwi
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
@@ -1368,6 +1328,10 @@ debug/productwidget.o: ../MobileStore/productwidget.cpp ../MobileStore/productwi
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		ui_productwidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAction \
@@ -1409,14 +1373,15 @@ debug/productwidget.o: ../MobileStore/productwidget.cpp ../MobileStore/productwi
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
 		../MobileStore/fileutils.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
 		../MobileStore/numberutils.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QtDebug
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productwidget.o ..\MobileStore\productwidget.cpp
 
 debug/user.o: ../MobileStore/user.cpp ../MobileStore/user.h \
-		../MobileStore/comment.h \
+		../MobileStore/person.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
@@ -1448,8 +1413,7 @@ debug/user.o: ../MobileStore/user.cpp ../MobileStore/user.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
-		../MobileStore/person.h
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\user.o ..\MobileStore\user.cpp
 
 debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
@@ -1488,7 +1452,6 @@ debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
 		../MobileStore/productstab.h \
 		../MobileStore/compareutils.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
@@ -1504,40 +1467,43 @@ debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
 		../MobileStore/productstable.h \
 		../MobileStore/productstablesize.h \
 		../MobileStore/productwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
@@ -1545,10 +1511,6 @@ debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
@@ -1568,6 +1530,10 @@ debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
@@ -1594,10 +1560,9 @@ debug/productstab.o: ../MobileStore/productstab.cpp ../MobileStore/algoutils.h \
 
 debug/compareutils.o: ../MobileStore/compareutils.cpp ../MobileStore/compareutils.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
@@ -1619,20 +1584,19 @@ debug/compareutils.o: ../MobileStore/compareutils.cpp ../MobileStore/compareutil
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
@@ -1692,7 +1656,145 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		../MobileStore/productstablesize.h \
 		../MobileStore/productwidget.h \
 		../MobileStore/product.h \
-		../MobileStore/comment.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtcore-config.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsysinfo.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlogging.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qflags.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregexp.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
+		../MobileStore/productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qshareddata.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qkeysequence.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qevent.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qurl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qurlquery.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfile.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qicon.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productstable.o ..\MobileStore\productstable.cpp
+
+debug/productstablesize.o: ../MobileStore/productstablesize.cpp ../MobileStore/productstablesize.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productstablesize.o ..\MobileStore\productstablesize.cpp
+
+debug/productbuydialog.o: ../MobileStore/productbuydialog.cpp ../MobileStore/fileutils.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QString \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
@@ -1725,6 +1827,9 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
+		../MobileStore/numberutils.h \
+		../MobileStore/productbuydialog.h \
+		../MobileStore/product.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVector \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
@@ -1737,40 +1842,42 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregexp.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtgui-config.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qrect.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qcolor.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgb.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qmatrix.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpolygon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qdatastream.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtransform.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpaintdevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixelformat.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpixmap.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
@@ -1778,10 +1885,6 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
@@ -1801,12 +1904,34 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QTableWidget \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtableview.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
+		ui_productbuydialog.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/QVariant \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qicon.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
@@ -1814,20 +1939,19 @@ debug/productstable.o: ../MobileStore/productstable.cpp ../MobileStore/productst
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtGui/qicon.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.10.1/mingw53_32/include/QtCore/QDebug
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productstable.o ..\MobileStore\productstable.cpp
-
-debug/productstablesize.o: ../MobileStore/productstablesize.cpp ../MobileStore/productstablesize.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productstablesize.o ..\MobileStore\productstablesize.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\productbuydialog.o ..\MobileStore\productbuydialog.cpp
 
 debug/moc_mainwindowcontroller.o: debug/moc_mainwindowcontroller.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_mainwindowcontroller.o debug\moc_mainwindowcontroller.cpp

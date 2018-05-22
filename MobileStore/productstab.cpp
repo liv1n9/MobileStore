@@ -35,6 +35,20 @@ int ProductsTab::getProductsDataSize()
     return productsData.size();
 }
 
+void ProductsTab::setIsUser(bool value)
+{
+    for (int i = 0; i < productsTableList.size(); i++) {
+        productsTableList.at(i)->setIsUser(value);
+    }
+}
+
+void ProductsTab::setIsGuess(bool value)
+{
+    for (int i = 0; i < productsTableList.size(); i++) {
+        productsTableList.at(i)->setIsGuess(value);
+    }
+}
+
 void ProductsTab::setProductsTab()
 {
     delete productsTab;

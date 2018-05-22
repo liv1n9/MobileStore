@@ -4,7 +4,7 @@
 #include "numberutils.h"
 
 #include <QGraphicsPixmapItem>
-#include <QtDebug>
+#include <QDebug>
 
 ProductWidget::ProductWidget(QWidget *parent) :
     QWidget(parent),
@@ -17,16 +17,16 @@ ProductWidget::~ProductWidget()
 {
     delete ui;
     delete scene;
+    delete d;
     qDebug() << "ProductsWidget destructor called";
 }
 
 void ProductWidget::setWidgetInfo(const Product &product)
 {
-    this->setCursor(Qt::PointingHandCursor);
-    this->setAttribute(Qt::WA_Hover);
+    delete d;
+    d = new ProductBuyDialog(this->window());
+    d->setDialogInfo(product);
     QGraphicsView *graphics = ui->image;
-    graphics->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    graphics->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     delete scene;
     scene = new QGraphicsScene(graphics);
     graphics->setScene(scene);
@@ -46,5 +46,21 @@ void ProductWidget::leaveEvent(QEvent *event)
 {
     ui->productName->setStyleSheet("QLabel { color: black; }");
     QWidget::leaveEvent(event);
+}
+
+void ProductWidget::mousePressEvent(QMouseEvent *event)
+{
+    d->exec();
+    QWidget::mousePressEvent(event);
+}
+
+void ProductWidget::setIsUser(bool value)
+{
+    d->setIsUser(value);
+}
+
+void ProductWidget::setIsGuess(bool value)
+{
+    d->setIsGuess(value);
 }
 

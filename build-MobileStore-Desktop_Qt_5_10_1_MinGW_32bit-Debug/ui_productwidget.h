@@ -32,9 +32,12 @@ public:
         if (ProductWidget->objectName().isEmpty())
             ProductWidget->setObjectName(QStringLiteral("ProductWidget"));
         ProductWidget->resize(200, 220);
+        ProductWidget->setCursor(QCursor(Qt::PointingHandCursor));
         image = new QGraphicsView(ProductWidget);
         image->setObjectName(QStringLiteral("image"));
         image->setGeometry(QRect(9, 9, 182, 164));
+        image->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        image->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         productName = new QLabel(ProductWidget);
         productName->setObjectName(QStringLiteral("productName"));
         productName->setGeometry(QRect(9, 179, 181, 16));
@@ -43,6 +46,7 @@ public:
         font.setPointSize(9);
         productName->setFont(font);
         productName->setStyleSheet(QStringLiteral(""));
+        productName->setWordWrap(false);
         productPrice = new QLabel(ProductWidget);
         productPrice->setObjectName(QStringLiteral("productPrice"));
         productPrice->setGeometry(QRect(9, 198, 181, 16));
@@ -52,6 +56,7 @@ public:
         font1.setWeight(75);
         productPrice->setFont(font1);
         productPrice->setStyleSheet(QStringLiteral("color:red; font-weight: bold"));
+        productPrice->setWordWrap(false);
 
         retranslateUi(ProductWidget);
 

@@ -15,6 +15,8 @@ MainWindowController::MainWindowController(QWidget *parent) :
     ui(new Ui::MainWindowController)
 {
     ui->setupUi(this);
+    ui->login->setEnabled(false);
+    ui->search->setEnabled(false);
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
                                           this->size(), qApp->desktop()->availableGeometry()));
     this->setFixedSize(size());
@@ -23,9 +25,9 @@ MainWindowController::MainWindowController(QWidget *parent) :
     setVisibleLogout(false);
     getAccountsData(ACCOUNTS_DATA_PATH);
     getProductsData(PRODUCTS_DATA_PATH);
-    setInitialProducts(popularProductsTab, CompareUtils::cmpPopular);
-    setInitialProducts(incProductsTab, CompareUtils::cmpIncPrice);
-    setInitialProducts(decProductsTab, CompareUtils::cmpDecPrice);
+    setInitialProducts(popularProductsTab, popularList, CompareUtils::cmpPopular);
+    setInitialProducts(incProductsTab, incList, CompareUtils::cmpIncPrice);
+    setInitialProducts(decProductsTab, decList, CompareUtils::cmpDecPrice);
     setStore(popularProductsTab);
     ui->mainWidget->setCurrentIndex(0);
 }
@@ -36,12 +38,15 @@ MainWindowController::~MainWindowController()
     delete ui;
     updateAccountsData(ACCOUNTS_DATA_PATH);
     updateProductsData(PRODUCTS_DATA_PATH);
-    if (isAdministrator()) {
-        delete adminAccount;
-        delete adminAccountsTab;
-        delete adminProductsTab;
+    delete adminAccountsTab;
+    delete adminProductsTab;
+    delete adminAccount;
+    delete userAccount;
+    for (int i = 0; i < 5; i++) {
+        delete popularList.at(i);
+        delete incList.at(i);
+        delete decList.at(i);
     }
-    if (isUser()) delete userAccount;
     delete popularProductsTab;
     delete incProductsTab;
     delete decProductsTab;
@@ -101,20 +106,28 @@ void MainWindowController::login()
         setVisibleLogin(false);
         setVisibleLogout(true);
         if (isAdministrator()) {
+            delete adminAccount;
+            delete adminAccountsTab;
+            delete adminProductsTab;
             adminAccount = new Administrator();
+            adminAccountsTab = new QTabWidget();
+            adminProductsTab = new QTabWidget();
             adminAccount->setId(accountsData.at(personIndex).getId());
             adminAccount->setUsername(username);
             adminAccount->setPassword(password);
             adminAccount->setName(accountsData.at(personIndex).getName());
-            ui->mainWidget->addTab(adminAccountsTab, "Quản lý tài khoản");
-            ui->mainWidget->addTab(adminProductsTab, "Quản lý sản phẩm");
+            ui->mainWidget->insertTab(1, adminAccountsTab, "Quản lý tài khoản");
+            ui->mainWidget->insertTab(2, adminProductsTab, "Quản lý sản phẩm");
         } else if (isUser()) {
+            delete userAccount;
             userAccount = new User();
             userAccount->setId(accountsData.at(personIndex).getId());
             userAccount->setUsername(username);
             userAccount->setPassword(password);
             userAccount->setName(accountsData.at(personIndex).getName());
         }
+        setIsUser(isUser());
+        setIsGuess(false);
         QMessageBox::information(this, " ", "Đăng nhập thành công!");
     } else {
         QMessageBox::information(this, " ", "Tài khoản không tồn tại!");
@@ -130,21 +143,30 @@ void MainWindowController::logout()
         setVisibleLogout(false);
         ui->username->clear();
         ui->password->clear();
-        ui->mainWidget->removeTab(1);
-        ui->mainWidget->removeTab(1);
-        QMessageBox::information(this, " ", "Đăng xuất thành công!");
+        if (isAdministrator()) {
+            ui->mainWidget->removeTab(1);
+            ui->mainWidget->removeTab(1);
+        }
+        ui->mainWidget->setCurrentIndex(0);
         personIndex = -1;
+        setIsUser(false);
+        setIsGuess(true);
+        QMessageBox::information(this, " ", "Đăng xuất thành công!");
     }
 }
 
 
-void MainWindowController::setInitialProducts(QTabWidget *&tab, bool (*cmp)(const Product&, const Product&))
+void MainWindowController::setInitialProducts(QTabWidget *&tab, QList<ProductsTab*> &list,
+                                              bool (*cmp)(const Product&, const Product&))
 {
+    delete tab;
     tab = new QTabWidget();
+    list.clear();
     tab->setStyleSheet("QTabBar::tab { width: 198px; height: 50px; font-size: 12px}");
     for (int i = 0; i < 5; i++) {
         ProductsTab *productsTab = new ProductsTab(productsData, productsTabLabel[i], cmp);
-        tab->addTab(productsTab->getProductsTab(), productsTabLabel[i]);
+        list.append(productsTab);
+        tab->addTab(list.at(i)->getProductsTab(), productsTabLabel[i]);
     }
 }
 
@@ -161,17 +183,48 @@ void MainWindowController::setStore(QTabWidget *&tab)
 
 void MainWindowController::getSearchResult()
 {
-    if (!removedSearch) delete searchProductsTab;
+    if (!removedSearch) {
+        delete searchResult;
+        delete searchProductsTab;
+    }
     removedSearch = false;
     searchResult = new ProductsTab(productsData, "search" + ui->searchKeyword->text(), CompareUtils::cmpPopular);
     QString searchInfo = QString::number(searchResult->getProductsDataSize()) + " kết quả tìm kiếm cho từ khoá: """
             + ui->searchKeyword->text() + """";
+    searchResult->setIsUser(isUser());
+    searchResult->setIsGuess(!isUser() && !isAdministrator());
     searchProductsTab = new QTabWidget();
     searchProductsTab->addTab(searchResult->getProductsTab(), searchInfo);
-    searchProductsTab->setStyleSheet("QTabBar::tab { width: " + QString::number(searchInfo.length()*10)
+    searchProductsTab->setStyleSheet("QTabBar::tab { width: " + QString::number(searchInfo.length()*9)
                                      + "px; height: 30px; font-size: 12px}");
-    ui->mainWidget->insertTab(0, searchProductsTab, SEARCH);
-    ui->mainWidget->setCurrentIndex(0);
+    int x = ui->mainWidget->addTab(searchProductsTab, SEARCH);
+    ui->mainWidget->setCurrentIndex(x);
+}
+
+void MainWindowController::setIsUser(bool value)
+{
+    for (int i = 0; i < popularList.size(); i++) {
+        popularList.at(i)->setIsUser(value);
+    }
+    for (int i = 0; i < incList.size(); i++) {
+        incList.at(i)->setIsUser(value);
+    }
+    for (int i = 0; i < decList.size(); i++) {
+        decList.at(i)->setIsUser(value);
+    }
+}
+
+void MainWindowController::setIsGuess(bool value)
+{
+    for (int i = 0; i < popularList.size(); i++) {
+        popularList.at(i)->setIsGuess(value);
+    }
+    for (int i = 0; i < incList.size(); i++) {
+        incList.at(i)->setIsGuess(value);
+    }
+    for (int i = 0; i < decList.size(); i++) {
+        decList.at(i)->setIsGuess(value);
+    }
 }
 
 void MainWindowController::on_popular_clicked()
@@ -231,24 +284,39 @@ void MainWindowController::on_mainWidget_currentChanged(int index)
 {
     if (!mainWindowControllerDestroyed) {
         setVisibleSearchSort(ui->mainWidget->currentWidget() == storeTab);
-        if (ui->mainWidget->count() > 0 && ui->mainWidget->currentWidget() == storeTab) {
+        if (ui->mainWidget->currentWidget() == storeTab) {
             storeTab->setCurrentIndex(0);
         }
-    }
-    if (index > 0 && !removedSearch) {
-        removedSearch = true;
-        delete searchResult;
-        delete searchProductsTab;
-        ui->searchKeyword->clear();
+        if (ui->mainWidget->currentWidget() != searchProductsTab && !removedSearch) {
+            removedSearch = true;
+            delete searchResult;
+            delete searchProductsTab;
+            ui->searchKeyword->clear();
+        }
     }
 }
 
 void MainWindowController::on_searchKeyword_returnPressed()
 {
-    getSearchResult();
+    if (ui->searchKeyword->text().length() > 0) getSearchResult();
 }
 
 void MainWindowController::on_search_clicked()
 {
     getSearchResult();
+}
+
+void MainWindowController::on_username_textChanged(const QString &arg1)
+{
+    ui->login->setEnabled(arg1.length() > 0 && ui->password->text().length() > 0);
+}
+
+void MainWindowController::on_password_textChanged(const QString &arg1)
+{
+    ui->login->setEnabled(arg1.length() > 0 && ui->login->text().length() > 0);
+}
+
+void MainWindowController::on_searchKeyword_textChanged(const QString &arg1)
+{
+    ui->search->setEnabled(arg1.length() > 0);
 }

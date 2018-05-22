@@ -4,8 +4,3 @@ User::User()
 {
 
 }
-
-void User::addComment(int productId, const QString &comment)
-{
-
-}

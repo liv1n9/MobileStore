@@ -13,7 +13,8 @@ public:
     ~ProductsTable();
     QTableWidget *getProductsTable() const;
     void appendWidgetList(int row, int column, const Product &product);
-
+    void setIsUser(bool value);
+    void setIsGuess(bool value);
 private:
     QTableWidget *productsTable;
     ProductWidget *productWidget;

@@ -3,7 +3,6 @@
 
 #include "accountsdataset.h"
 #include "administrator.h"
-#include "comment.h"
 #include "person.h"
 #include "product.h"
 #include "productsdataset.h"
@@ -34,25 +33,33 @@ private slots:
     void on_logout_clicked();
     void on_mainWidget_currentChanged(int index);
     void on_searchKeyword_returnPressed();
-
     void on_search_clicked();
+    void on_username_textChanged(const QString &arg1);
+    void on_password_textChanged(const QString &arg1);
+
+    void on_searchKeyword_textChanged(const QString &arg1);
 
 private:
     const QString productsTabLabel[5] = {"TẤT CẢ", "IPHONE", "SAMSUNG", "OPPO", "HÃNG KHÁC"};
     Ui::MainWindowController *ui;
-    const QString ACCOUNTS_DATA_PATH = "\\accounts.txt";
-    const QString PRODUCTS_DATA_PATH = "\\products.txt";
+    const QString ACCOUNTS_DATA_PATH = "\\data\\accounts.txt";
+    const QString PRODUCTS_DATA_PATH = "\\data\\products.txt";
     const QString STORE = "Cửa hàng";
     const QString SEARCH = "Tìm kiếm";
     int personIndex = -1;
     bool removedSearch = true;
     bool mainWindowControllerDestroyed = false;
-    Administrator *adminAccount;
-    User *userAccount;
-    QTabWidget *popularProductsTab, *incProductsTab, *decProductsTab;
-    QTabWidget *storeTab = new QTabWidget(), *adminAccountsTab = new QTabWidget(), *adminProductsTab = new QTabWidget();
+    Administrator *adminAccount = new Administrator();
+    User *userAccount = new User();
+    QTabWidget *popularProductsTab = new QTabWidget();
+    QTabWidget *incProductsTab = new QTabWidget();
+    QTabWidget *decProductsTab = new QTabWidget();
+    QTabWidget *storeTab = new QTabWidget();
+    QTabWidget *adminAccountsTab = new QTabWidget();
+    QTabWidget *adminProductsTab = new QTabWidget();
     QTabWidget *searchProductsTab = new QTabWidget();
     ProductsTab *searchResult;
+    QList<ProductsTab*> popularList, incList, decList;
 
     int getPersonIndex(const QString &username, const QString &password);
     bool isAdministrator();
@@ -62,10 +69,11 @@ private:
     void setVisibleSearchSort(bool arg);
     void login();
     void logout();
-    void setInitialProducts(QTabWidget *&tab, bool (*cmp)(const Product&, const Product&));
+    void setInitialProducts(QTabWidget *&tab, QList<ProductsTab*> &list, bool (*cmp)(const Product&, const Product&));
     void setStore(QTabWidget *&tab);
     void getSearchResult();
-
+    void setIsUser(bool value);
+    void setIsGuess(bool value);
 };
 
 #endif // MAINWINDOWCONTROLLER_H

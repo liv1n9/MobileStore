@@ -97,6 +97,7 @@ public:
         login = new QPushButton(layoutWidget);
         login->setObjectName(QStringLiteral("login"));
         login->setFont(font1);
+        login->setCheckable(false);
 
         accountLayout->addWidget(login);
 

@@ -10,6 +10,9 @@
     <height>220</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>PointingHandCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -21,6 +24,12 @@
      <width>182</width>
      <height>164</height>
     </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
   </widget>
   <widget class="QLabel" name="productName">
@@ -44,6 +53,9 @@
    <property name="text">
     <string>NAME</string>
    </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="productPrice">
    <property name="geometry">
@@ -66,6 +78,9 @@
    </property>
    <property name="text">
     <string>PRICE</string>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

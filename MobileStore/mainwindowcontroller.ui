@@ -103,6 +103,9 @@
        <property name="text">
         <string>Đăng nhập</string>
        </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>
