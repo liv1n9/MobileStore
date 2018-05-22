@@ -2,12 +2,10 @@
 #define MAINWINDOWCONTROLLER_H
 
 #include "accountsdataset.h"
-#include "administrator.h"
 #include "person.h"
 #include "product.h"
 #include "productsdataset.h"
 #include "productstab.h"
-#include "user.h"
 
 #include <QMainWindow>
 
@@ -49,8 +47,6 @@ private:
     int personIndex = -1;
     bool removedSearch = true;
     bool mainWindowControllerDestroyed = false;
-    Administrator *adminAccount = new Administrator();
-    User *userAccount = new User();
     QTabWidget *popularProductsTab = new QTabWidget();
     QTabWidget *incProductsTab = new QTabWidget();
     QTabWidget *decProductsTab = new QTabWidget();

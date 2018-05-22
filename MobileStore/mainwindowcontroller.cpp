@@ -40,8 +40,6 @@ MainWindowController::~MainWindowController()
     updateProductsData(PRODUCTS_DATA_PATH);
     delete adminAccountsTab;
     delete adminProductsTab;
-    delete adminAccount;
-    delete userAccount;
     for (int i = 0; i < 5; i++) {
         delete popularList.at(i);
         delete incList.at(i);
@@ -106,25 +104,12 @@ void MainWindowController::login()
         setVisibleLogin(false);
         setVisibleLogout(true);
         if (isAdministrator()) {
-            delete adminAccount;
             delete adminAccountsTab;
             delete adminProductsTab;
-            adminAccount = new Administrator();
             adminAccountsTab = new QTabWidget();
             adminProductsTab = new QTabWidget();
-            adminAccount->setId(accountsData.at(personIndex).getId());
-            adminAccount->setUsername(username);
-            adminAccount->setPassword(password);
-            adminAccount->setName(accountsData.at(personIndex).getName());
             ui->mainWidget->insertTab(1, adminAccountsTab, "Quản lý tài khoản");
             ui->mainWidget->insertTab(2, adminProductsTab, "Quản lý sản phẩm");
-        } else if (isUser()) {
-            delete userAccount;
-            userAccount = new User();
-            userAccount->setId(accountsData.at(personIndex).getId());
-            userAccount->setUsername(username);
-            userAccount->setPassword(password);
-            userAccount->setName(accountsData.at(personIndex).getName());
         }
         setIsUser(isUser());
         setIsGuess(false);

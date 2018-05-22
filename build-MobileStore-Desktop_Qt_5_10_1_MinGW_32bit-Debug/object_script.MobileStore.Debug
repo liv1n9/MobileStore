@@ -1,6 +1,5 @@
 INPUT(
 ./debug\accountsdataset.o
-./debug\administrator.o
 ./debug\fileutils.o
 ./debug\main.o
 ./debug\mainwindowcontroller.o
@@ -9,7 +8,6 @@ INPUT(
 ./debug\product.o
 ./debug\productsdataset.o
 ./debug\productwidget.o
-./debug\user.o
 ./debug\productstab.o
 ./debug\compareutils.o
 ./debug\algoutils.o

@@ -1,6 +1,5 @@
 INPUT(
 ./release\accountsdataset.o
-./release\administrator.o
 ./release\fileutils.o
 ./release\main.o
 ./release\mainwindowcontroller.o
@@ -9,7 +8,6 @@ INPUT(
 ./release\product.o
 ./release\productsdataset.o
 ./release\productwidget.o
-./release\user.o
 ./release\productstab.o
 ./release\compareutils.o
 ./release\algoutils.o

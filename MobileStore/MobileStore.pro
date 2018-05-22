@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     accountsdataset.cpp \
-    administrator.cpp \
     fileutils.cpp \
     main.cpp \
     mainwindowcontroller.cpp \
@@ -34,7 +33,6 @@ SOURCES += \
     product.cpp \
     productsdataset.cpp \
     productwidget.cpp \
-    user.cpp \
     productstab.cpp \
     compareutils.cpp \
     algoutils.cpp \
@@ -44,7 +42,6 @@ SOURCES += \
 
 HEADERS += \
     accountsdataset.h \
-    administrator.h \
     fileutils.h \
     mainwindowcontroller.h \
     numberutils.h \
@@ -52,7 +49,6 @@ HEADERS += \
     product.h \
     productsdataset.h \
     productwidget.h \
-    user.h \
     productstab.h \
     compareutils.h \
     algoutils.h \
