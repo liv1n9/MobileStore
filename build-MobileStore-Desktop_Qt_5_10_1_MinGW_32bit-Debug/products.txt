@@ -1,0 +1,49 @@
+8 8
+1
+iPhone X 256GB
+IPHONE
+34790
+\\img\\iphone_x.png
+90
+2
+iPhone X 64GB
+IPHONE
+29990
+\\img\\iphone_x.png
+95
+3
+iPhone 8 64GB
+IPHONE
+20990
+\\img\\iphone_8.png
+88
+4
+iPhone 8 256GB
+IPHONE
+25790
+\\img\\iphone_8.png
+87
+5
+iPhone 7 32GB
+IPHONE
+15990
+\\img\\iphone_7.png
+83
+6
+iPhone 7 Plus 32GB
+IPHONE
+19900
+\\img\\iphone_7_plus.png
+86
+7
+Samsung Galaxy J7+
+SAMSUNG
+7290
+\\img\\j7_plus.png
+84
+8
+Samsung Galaxy Note 8
+SAMSUNG
+22490
+\\img\\note_8.png
+90
