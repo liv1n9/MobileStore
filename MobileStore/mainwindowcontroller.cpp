@@ -16,16 +16,17 @@ MainWindowController::MainWindowController(QWidget *parent) :
 
 {
     ui->setupUi(this);
+    getAccountsData(ACCOUNTS_DATA_PATH);
+    getProductsData(PRODUCTS_DATA_PATH);
+    getRegisterData(REGISTER_DATA_PATH);
+    d = new RegisterDialog(registerData, accountsData);
     ui->login->setEnabled(false);
     ui->search->setEnabled(false);
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
                                           this->size(), qApp->desktop()->availableGeometry()));
     this->setFixedSize(size());
     this->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    ui->mainWidget->setStyleSheet("QTabBar::tab { width: 160px; height: 30px}");
     setVisibleLogout(false);
-    getAccountsData(ACCOUNTS_DATA_PATH);
-    getProductsData(PRODUCTS_DATA_PATH);
     setInitialProducts(popularProductsTab, popularList, CompareUtils::cmpPopular);
     setInitialProducts(incProductsTab, incList, CompareUtils::cmpIncPrice);
     setInitialProducts(decProductsTab, decList, CompareUtils::cmpDecPrice);
@@ -48,9 +49,9 @@ MainWindowController::~MainWindowController()
     delete decProductsTab;
     if (!removedSearch) delete searchProductsTab;
     delete adminAccountsTab;
-    delete adminProductsTab;
     updateAccountsData(ACCOUNTS_DATA_PATH);
     updateProductsData(PRODUCTS_DATA_PATH);
+    updateRegisterData(REGISTER_DATA_PATH);
 }
 
 int MainWindowController::getPersonIndex(const QString &username, const QString &password)
@@ -96,6 +97,19 @@ void MainWindowController::setVisibleSearchSort(bool arg)
     ui->decPrice->setVisible(arg);
 }
 
+void MainWindowController::acceptRegister()
+{
+    for (int i = 0; i < registerData.size(); i++) {
+        Person *person = new Person();
+        person->setId(++lastAccountId);
+        person->setUsername(registerData.at(i).getUsername());
+        person->setPassword(registerData.at(i).getPassword());
+        person->setName(registerData.at(i).getName());
+        accountsData.append(*person);
+    }
+    registerData.clear();
+}
+
 void MainWindowController::login()
 {
     QString username = ui->username->text();
@@ -107,7 +121,7 @@ void MainWindowController::login()
         setVisibleLogout(true);
         if (isAdministrator()) {
             ui->mainWidget->insertTab(1, adminAccountsTab, "Quản lý tài khoản");
-            ui->mainWidget->insertTab(2, adminProductsTab, "Quản lý sản phẩm");
+            acceptRegister();
         }
         setIsUser(isUser());
         setIsGuess(false);
@@ -127,7 +141,6 @@ void MainWindowController::logout()
         ui->username->clear();
         ui->password->clear();
         if (isAdministrator()) {
-            ui->mainWidget->removeTab(1);
             ui->mainWidget->removeTab(1);
         }
         ui->mainWidget->setCurrentIndex(0);
@@ -302,4 +315,9 @@ void MainWindowController::on_password_textChanged(const QString &arg1)
 void MainWindowController::on_searchKeyword_textChanged(const QString &arg1)
 {
     ui->search->setEnabled(arg1.length() > 0);
+}
+
+void MainWindowController::on__register_clicked()
+{
+    d->exec();
 }

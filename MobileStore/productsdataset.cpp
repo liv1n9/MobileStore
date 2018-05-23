@@ -29,18 +29,6 @@ void ProductsDataSet::getProductsData(const QString &dataPath)
     file.close();
 }
 
-void ProductsDataSet::addProduct(const QString &name, const QString &brand, int price, const QString &imagePath, int popular)
-{
-    Product product;
-    product.setId(++lastProductId);
-    product.setName(name);
-    product.setBrand(brand);
-    product.setPrice(price);
-    product.setImagePath(imagePath);
-    product.setPopular(popular);
-    productsData.append(product);
-}
-
 void ProductsDataSet::updateProductsData(const QString &dataPath)
 {
     QFile file(FileUtils::getRootPath(dataPath));

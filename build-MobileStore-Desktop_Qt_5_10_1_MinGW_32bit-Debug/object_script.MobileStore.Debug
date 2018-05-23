@@ -16,8 +16,12 @@ INPUT(
 ./debug\productbuydialog.o
 ./debug\accountsmanagerwidget.o
 ./debug\deleteaccountbutton.o
+./debug\registerdataset.o
+./debug\register.o
+./debug\registerdialog.o
 ./debug\moc_mainwindowcontroller.o
 ./debug\moc_productwidget.o
 ./debug\moc_accountsmanagerwidget.o
 ./debug\moc_deleteaccountbutton.o
+./debug\moc_registerdialog.o
 );

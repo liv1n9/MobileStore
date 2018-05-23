@@ -56,6 +56,7 @@ public:
         if (MainWindowController->objectName().isEmpty())
             MainWindowController->setObjectName(QStringLiteral("MainWindowController"));
         MainWindowController->resize(1000, 660);
+        MainWindowController->setStyleSheet(QStringLiteral("QTabBar::tab { width: 160px; height: 30px}"));
         centralwidget = new QWidget(MainWindowController);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         mainWidget = new QTabWidget(centralwidget);
@@ -65,6 +66,7 @@ public:
         font.setPointSize(9);
         font.setKerning(true);
         mainWidget->setFont(font);
+        mainWidget->setStyleSheet(QStringLiteral("QTabBar::tab { width: 160px; height: 30px}"));
         mainWidget->setTabPosition(QTabWidget::North);
         mainWidget->setTabShape(QTabWidget::Triangular);
         mainWidget->setIconSize(QSize(16, 16));

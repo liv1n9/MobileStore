@@ -7,6 +7,8 @@
 #include "product.h"
 #include "productsdataset.h"
 #include "productstab.h"
+#include "registerdataset.h"
+#include "registerdialog.h"
 
 #include <QMainWindow>
 
@@ -14,7 +16,7 @@ namespace Ui {
 class MainWindowController;
 }
 
-class MainWindowController : public QMainWindow, AccountsDataSet, ProductsDataSet
+class MainWindowController : public QMainWindow, AccountsDataSet, ProductsDataSet, RegisterDataSet
 {
     Q_OBJECT
 
@@ -35,14 +37,15 @@ private slots:
     void on_search_clicked();
     void on_username_textChanged(const QString &arg1);
     void on_password_textChanged(const QString &arg1);
-
     void on_searchKeyword_textChanged(const QString &arg1);
+    void on__register_clicked();
 
 private:
     const QString productsTabLabel[5] = {"TẤT CẢ", "IPHONE", "SAMSUNG", "OPPO", "HÃNG KHÁC"};
     Ui::MainWindowController *ui;
     const QString ACCOUNTS_DATA_PATH = "\\data\\accounts.txt";
     const QString PRODUCTS_DATA_PATH = "\\data\\products.txt";
+    const QString REGISTER_DATA_PATH = "\\data\\register.txt";
     const QString STORE = "Cửa hàng";
     const QString SEARCH = "Tìm kiếm";
     int personIndex = -1;
@@ -53,10 +56,10 @@ private:
     QTabWidget *decProductsTab = new QTabWidget();
     QTabWidget *storeTab = new QTabWidget();
     AccountsManagerWidget *adminAccountsTab;
-    QTabWidget *adminProductsTab = new QTabWidget();
     QTabWidget *searchProductsTab = new QTabWidget();
     ProductsTab *searchResult;
     QList<ProductsTab*> popularList, incList, decList;
+    RegisterDialog *d;
 
     int getPersonIndex(const QString &username, const QString &password);
     bool isAdministrator();
@@ -64,6 +67,7 @@ private:
     void setVisibleLogin(bool arg);
     void setVisibleLogout(bool arg);
     void setVisibleSearchSort(bool arg);
+    void acceptRegister();
     void login();
     void logout();
     void setInitialProducts(QTabWidget *&tab, QList<ProductsTab*> &list, bool (*cmp)(const Product&, const Product&));

@@ -13,7 +13,6 @@ public:
     QList<Person> accountsData;
     int lastAccountId;
     void getAccountsData(const QString &dataPath);
-    void addAccount(const QString &username, const QString &password, const QString &name);
     void updateAccountsData(const QString &dataPath);
 };
 

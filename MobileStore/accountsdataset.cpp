@@ -30,16 +30,6 @@ void AccountsDataSet::getAccountsData(const QString &dataPath)
     file.close();
 }
 
-void AccountsDataSet::addAccount(const QString &username, const QString &password, const QString &name)
-{
-    Person person;
-    person.setId(++lastAccountId);
-    person.setUsername(username);
-    person.setPassword(password);
-    person.setName(name);
-    accountsData.append(person);
-}
-
 void AccountsDataSet::updateAccountsData(const QString &dataPath)
 {
     QFile file(FileUtils::getRootPath(dataPath));

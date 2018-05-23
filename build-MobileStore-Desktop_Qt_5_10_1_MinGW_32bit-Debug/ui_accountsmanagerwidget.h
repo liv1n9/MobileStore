@@ -33,12 +33,12 @@ public:
         AccountsManagerWidget->resize(1000, 525);
         accountsInfo = new QTabWidget(AccountsManagerWidget);
         accountsInfo->setObjectName(QStringLiteral("accountsInfo"));
-        accountsInfo->setGeometry(QRect(0, 40, 1000, 461));
+        accountsInfo->setGeometry(QRect(0, 50, 1000, 461));
         accountsInfo->setTabPosition(QTabWidget::South);
         accountsInfo->setTabShape(QTabWidget::Triangular);
         searchKeyword = new QLineEdit(AccountsManagerWidget);
         searchKeyword->setObjectName(QStringLiteral("searchKeyword"));
-        searchKeyword->setGeometry(QRect(741, 12, 251, 20));
+        searchKeyword->setGeometry(QRect(741, 20, 251, 20));
 
         retranslateUi(AccountsManagerWidget);
 
