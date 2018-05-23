@@ -56,16 +56,14 @@ void ProductsTab::setProductsTab()
     productsTab->setStyleSheet("QTabBar::tab { width: 50px; height: 15px }");
     productsTab->setTabShape(QTabWidget::Triangular);
     productsTab->setTabPosition(QTabWidget::South);
-    if (!productsData.empty()) {
-        int row = getROW();
-        int column = getCOLUMN();
-        for (int cnt = 0; cnt * row * column < productsData.size(); cnt++) {
-            productsTableList.append(new ProductsTable());
-            for (int i = cnt * row * column; i < std::min((int)productsData.size(), (cnt + 1) * row * column); i++) {
-                productsTableList.at(cnt)->appendWidgetList(i / column, i % column, productsData.at(i));
-            }
-            productsTab->addTab(productsTableList.at(cnt)->getProductsTable(), QString::number(cnt + 1));
+    int row = getROW();
+    int column = getCOLUMN();
+    for (int cnt = 0; cnt * row * column < productsData.size(); cnt++) {
+        productsTableList.append(new ProductsTable());
+        for (int i = cnt * row * column; i < std::min((int)productsData.size(), (cnt + 1) * row * column); i++) {
+            productsTableList.at(cnt)->appendWidgetList(i / column, i % column, productsData.at(i));
         }
+        productsTab->addTab(productsTableList.at(cnt)->getProductsTable(), QString::number(cnt + 1));
     }
 }
 

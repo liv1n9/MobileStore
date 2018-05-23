@@ -13,6 +13,7 @@
 MainWindowController::MainWindowController(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindowController)
+
 {
     ui->setupUi(this);
     ui->login->setEnabled(false);
@@ -30,16 +31,13 @@ MainWindowController::MainWindowController(QWidget *parent) :
     setInitialProducts(decProductsTab, decList, CompareUtils::cmpDecPrice);
     setStore(popularProductsTab);
     ui->mainWidget->setCurrentIndex(0);
+    adminAccountsTab = new AccountsManagerWidget(accountsData);
 }
 
 MainWindowController::~MainWindowController()
 {
     mainWindowControllerDestroyed = true;
     delete ui;
-    updateAccountsData(ACCOUNTS_DATA_PATH);
-    updateProductsData(PRODUCTS_DATA_PATH);
-    delete adminAccountsTab;
-    delete adminProductsTab;
     for (int i = 0; i < 5; i++) {
         delete popularList.at(i);
         delete incList.at(i);
@@ -49,6 +47,10 @@ MainWindowController::~MainWindowController()
     delete incProductsTab;
     delete decProductsTab;
     if (!removedSearch) delete searchProductsTab;
+    delete adminAccountsTab;
+    delete adminProductsTab;
+    updateAccountsData(ACCOUNTS_DATA_PATH);
+    updateProductsData(PRODUCTS_DATA_PATH);
 }
 
 int MainWindowController::getPersonIndex(const QString &username, const QString &password)
@@ -104,10 +106,6 @@ void MainWindowController::login()
         setVisibleLogin(false);
         setVisibleLogout(true);
         if (isAdministrator()) {
-            delete adminAccountsTab;
-            delete adminProductsTab;
-            adminAccountsTab = new QTabWidget();
-            adminProductsTab = new QTabWidget();
             ui->mainWidget->insertTab(1, adminAccountsTab, "Quản lý tài khoản");
             ui->mainWidget->insertTab(2, adminProductsTab, "Quản lý sản phẩm");
         }

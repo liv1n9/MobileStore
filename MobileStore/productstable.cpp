@@ -53,7 +53,6 @@ void ProductsTable::setProducesTable()
     productsTable->setColumnCount(getCOLUMN());
     productsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     productsTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    QPalette palette = productsTable->palette();
-    palette.setBrush(QPalette::Highlight, QBrush(Qt::white));
-    productsTable->setPalette(palette);
+    productsTable->setSelectionBehavior( QAbstractItemView::SelectItems );
+    productsTable->setSelectionMode( QAbstractItemView::SingleSelection );
 }

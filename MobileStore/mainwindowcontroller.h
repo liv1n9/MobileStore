@@ -2,6 +2,7 @@
 #define MAINWINDOWCONTROLLER_H
 
 #include "accountsdataset.h"
+#include "accountsmanagerwidget.h"
 #include "person.h"
 #include "product.h"
 #include "productsdataset.h"
@@ -51,7 +52,7 @@ private:
     QTabWidget *incProductsTab = new QTabWidget();
     QTabWidget *decProductsTab = new QTabWidget();
     QTabWidget *storeTab = new QTabWidget();
-    QTabWidget *adminAccountsTab = new QTabWidget();
+    AccountsManagerWidget *adminAccountsTab;
     QTabWidget *adminProductsTab = new QTabWidget();
     QTabWidget *searchProductsTab = new QTabWidget();
     ProductsTab *searchResult;

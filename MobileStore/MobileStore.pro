@@ -38,7 +38,9 @@ SOURCES += \
     algoutils.cpp \
     productstable.cpp \
     productstablesize.cpp \
-    productbuydialog.cpp
+    productbuydialog.cpp \
+    accountsmanagerwidget.cpp \
+    deleteaccountbutton.cpp
 
 HEADERS += \
     accountsdataset.h \
@@ -54,12 +56,15 @@ HEADERS += \
     algoutils.h \
     productstable.h \
     productstablesize.h \
-    productbuydialog.h
+    productbuydialog.h \
+    accountsmanagerwidget.h \
+    deleteaccountbutton.h
 
 FORMS += \
     mainwindowcontroller.ui \
     productwidget.ui \
-    productbuydialog.ui
+    productbuydialog.ui \
+    accountsmanagerwidget.ui
 
 SUBDIRS += \
     MobileStore.pro
