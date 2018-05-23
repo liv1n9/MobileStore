@@ -35,12 +35,12 @@ void AccountsDataSet::updateAccountsData(const QString &dataPath)
     QFile file(FileUtils::getRootPath(dataPath));
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
-    out << accountsData.size() << ' ' << lastAccountId << endl;
-    for (Person i: accountsData) {
-        out << i.getId() << endl;
-        out << i.getUsername() << endl;
-        out << i.getPassword() << endl;
-        out << i.getName() << endl;
+    out << accountsData.size() << ' ' << accountsData.size() << endl;
+    for (int i = 0; i < accountsData.size(); i++) {
+        out << i << endl;
+        out << accountsData.at(i).getUsername() << endl;
+        out << accountsData.at(i).getPassword() << endl;
+        out << accountsData.at(i).getName() << endl;
     }
     accountsData.clear();
     file.close();

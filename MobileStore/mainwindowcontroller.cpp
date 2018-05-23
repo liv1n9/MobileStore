@@ -108,6 +108,8 @@ void MainWindowController::acceptRegister()
         accountsData.append(*person);
     }
     registerData.clear();
+    adminAccountsTab->setAccountsList();
+
 }
 
 void MainWindowController::login()
